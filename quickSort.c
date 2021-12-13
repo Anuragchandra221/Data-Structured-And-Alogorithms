@@ -1,6 +1,6 @@
 #include<stdio.h>
-int a[10] = {7, 2, 3, 12, 32};
-int n = 5;
+int a[10];
+int n;
 int partition(int low, int high){
     int i, j, pivot, temp;
     i = low;
@@ -34,8 +34,15 @@ void quick(int low, int high){
     
 }
 void main(){
+    int i;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    printf("Enter the elements: ");
+    for(i=0;i<n;i++){
+        scanf("%d", &a[i]);
+    }
     quick(0, n-1);
-    for(int i = 0; i<5; i++){
+    for(i = 0; i<5; i++){
         printf("%d ", a[i]);
     }
 }
