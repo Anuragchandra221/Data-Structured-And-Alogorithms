@@ -28,7 +28,7 @@ int main(){
     int i=0;
     char *e;
     printf("Enter the expression: ");
-    scanf("%s", &exp);
+    fgets(exp, 20, stdin);
     e=exp;
     while(*e!='\0'){
         if(isalnum(*e)){
