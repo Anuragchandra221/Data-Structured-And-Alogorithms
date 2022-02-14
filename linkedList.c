@@ -40,77 +40,86 @@ int main(){
     }
 }
 void insertBeg(){
-    struct node *ptr;
     int item;
+    struct node *ptr;
     ptr = (struct node *)malloc(sizeof(struct node *));
-    if(ptr == NULL){
+    if(ptr==NULL){
         printf("Overflow");
     }else{
         printf("Enter the element: ");
         scanf("%d", &item);
         ptr->data = item;
-        ptr->next = head;
-        head = ptr;
+        if(head!=NULL){
+            ptr->next = head;
+            head = ptr; 
+        }else{
+            head = ptr;
+            ptr->next = NULL;
+        }
     }
 }
 void display(){
-    struct node *ptr;
-    ptr = head;
-    while(ptr!=NULL){
-        printf("%d", ptr->data);
-        if(ptr->next != NULL){
-            printf("--->");
+    if(head!=NULL){
+        struct node *ptr;
+        ptr = head;
+        while(ptr!=NULL){
+            printf("%d ", ptr->data);
+            if(ptr->next != NULL){
+                printf("--->");
+            }
+            ptr = ptr->next;
         }
-        ptr = ptr->next;
+    }
+    else{
+        printf("Linked list is empty");
     }
 }
 void deleteBeg(){
-    struct node *ptr;
-    if(head==NULL){
-        printf("No elements left");
-    }else{
+    if(head!=NULL){
+        struct node* ptr;
         ptr = head;
+        printf("Deleted %d", head->data);
         head = ptr->next;
         free(ptr);
+    }else{
+        printf("Underflow");
     }
 }
 void insertEnd(){
-    struct node *ptr, *temp;
+    struct node *ptr;
     int item;
     ptr = (struct node *)malloc(sizeof(struct node *));
     if(ptr==NULL){
         printf("Overflow");
     }else{
-        printf("Enter element: ");
+        printf("Enter the element: ");
         scanf("%d", &item);
         ptr->data = item;
-        if(head==NULL){
-            ptr->next = NULL;
-            head = ptr;
-        }else{
+        if(head!=NULL){
+            struct node *temp;
             temp = head;
-            while(temp->next!=NULL){
+            while(temp->next != NULL){
                 temp = temp->next;
             }
             temp->next = ptr;
+            ptr->next = NULL;
+        }else{
+            head = ptr;
             ptr->next = NULL;
         }
     }
 }
 void deleteEnd(){
-    struct node *ptr, *temp;
-    if(head==NULL){
-        printf("No elements");
-    }else if(head->next == NULL){
-        head = NULL;
-        free(head);
-    }else{
+    if(head!=NULL){
+        struct node *ptr, *temp;
         ptr = head;
-        while(ptr->next!=NULL){
+        while(ptr->next != NULL){
             temp = ptr;
             ptr = ptr->next;
         }
         temp->next = NULL;
         free(ptr);
+    }else{
+        printf("There are no elements in the linked list");
     }
 }
