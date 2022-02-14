@@ -27,6 +27,7 @@ int main(){
             run=0;
             break;
         default:
+            printf("Invalid option");
             break;
         }
     }

@@ -1,45 +1,38 @@
 #include<stdio.h>
-int queue[20], front = -1, rear = -1, max_size;
+int queue[20], front = 0, rear = -1, max_size;
 void enqueue(){
-    int x;
-    if(rear==max_size-1){
-        printf("Overflow");
-    }else if(front==-1 && rear==-1){
+    int item;
+    if(rear<max_size-1){
         printf("Enter the element: ");
-        scanf("%d", &x);
-        rear = rear + 1;
-        front = front + 1;
-        queue[rear] = x;
+        scanf("%d", &item);
+        rear = rear+1;
+        queue[rear] = item;
     }else{
-        printf("Enter the element: ");
-        scanf("%d", &x);
-        rear = rear + 1;
-        queue[rear] = x;
+        printf("\nOverflow\n");
     }
 }
 void dequeue(){
-    if(front<rear){
-        if(front==-1 && rear==-1){
-            printf("underflow");
-        }else if(front==rear){
-            front = -1;
+    if(rear!=-1 && front<=rear){
+        if(front==rear){
+            printf("Deleted %d", queue[front]);
+            front = 0;
             rear = -1;
         }else{
-            front++;
+            printf("Deleted %d", queue[front]);
+            front = front + 1;
         }
+    }else{
+        printf("\nUnderflow\n");
     }
 }
 void display(){
     int i;
-     if(front==-1 && rear==-1){
-        printf("There are no elements");
-    }
-    else if(front<=rear){
+    if(rear!=-1 && front<=rear){
         for(i=front; i<=rear; i++){
             printf("%d ", queue[i]);
         }
     }else{
-        printf("There are no elements");
+        printf("\nQueue is empty\n");
     }
 }
 int main(){
@@ -48,7 +41,7 @@ int main(){
     printf("\nEnter the size of queue: ");
     scanf("%d", &max_size);
     while (run==1){
-        printf("\nOptions\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("\nQUEUE OPERATIONS\n1. Enqueue 2. Dequeue 3. Display 4. Exit\n");
         scanf("%d", &choice);
         switch (choice){
         case 1:
@@ -63,9 +56,8 @@ int main(){
         case 4:
             run=0;
             break;
-        case 5:
-            printf("%d %d", front, rear);
         default:
+            printf("Invalid input");
             break;
         }
     }
