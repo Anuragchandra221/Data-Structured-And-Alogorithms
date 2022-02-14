@@ -78,11 +78,10 @@ void deleteBeg(){
     if(head!=NULL){
         struct node* ptr;
         ptr = head;
-        printf("Deleted %d", head->data);
         head = ptr->next;
         free(ptr);
     }else{
-        printf("Underflow");
+        printf("No elements in linked list");
     }
 }
 void insertEnd(){
@@ -120,6 +119,6 @@ void deleteEnd(){
         temp->next = NULL;
         free(ptr);
     }else{
-        printf("There are no elements in the linked list");
+        printf("No elements in linked list");
     }
 }
