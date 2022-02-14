@@ -11,7 +11,7 @@ void display();
 int main(){
     int choice, run=1;
     while (run==1){
-        printf("\nOptions\n1. Push\n2. Pop\n3. Display\n4. Exit\n");
+        printf("\nOptions\n1. Push 2. Pop 3. Display 4. Exit\n");
         scanf("%d", &choice);
         switch (choice){
         case 1:
@@ -41,29 +41,36 @@ void push(){
         printf("Enter the element: ");
         scanf("%d", &item);
         ptr->data = item;
-        ptr->next = head;
-        head = ptr; 
+        if(head!=NULL){
+            ptr->next = head;
+            head = ptr; 
+        }else{
+            head = ptr;
+            ptr->next = NULL;
+        }
     }
 }
 void pop(){
-    struct node* ptr;
-    if(head==NULL){
-        printf("Underflow");
-    }else{
+    if(head!=NULL){
+        struct node* ptr;
         ptr = head;
         printf("Deleted %d", head->data);
         head = ptr->next;
         free(ptr);
+    }else{
+        printf("Underflow");
     }
 }
 void display(){
-    struct node *ptr;
-    ptr = head;
-    while(ptr!=NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->next;
+    if(head!=NULL){
+        struct node *ptr;
+        ptr = head;
+        while(ptr!=NULL){
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
     }
-    if(ptr==NULL){
-        printf("Stack is empty");
+    else{
+        printf("Queue is empty");
     }
 }
