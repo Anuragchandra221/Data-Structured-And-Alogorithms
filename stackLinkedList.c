@@ -71,6 +71,6 @@ void display(){
         }
     }
     else{
-        printf("Queue is empty");
+        printf("Stack is empty");
     }
 }

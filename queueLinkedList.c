@@ -11,7 +11,7 @@ struct node *head;
 int main(){
     int choice, run=1;
     while(run==1){
-        printf("\nOptions\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("\nOptions\n1. Enqueue 2. Dequeue 3. Display 4. Exit\n");
         scanf("%d", &choice);
         switch (choice){
         case 1:
@@ -32,7 +32,7 @@ int main(){
     }
 }
 void enqueue(){
-    struct node *ptr, *temp;
+    struct node *ptr;
     int item;
     ptr = (struct node *)malloc(sizeof(struct node *));
     if(ptr==NULL){
@@ -41,37 +41,41 @@ void enqueue(){
         printf("Enter the element: ");
         scanf("%d", &item);
         ptr->data = item;
-        if(head==NULL){
-            ptr->next = NULL;
-            head = ptr;
-        }else{
+        if(head!=NULL){
+            struct node *temp;
             temp = head;
             while(temp->next != NULL){
                 temp = temp->next;
             }
             temp->next = ptr;
             ptr->next = NULL;
+        }else{
+            head = ptr;
+            ptr->next = NULL;
         }
     }
 }
 void dequeue(){
-    struct node *ptr;
-    if(head==NULL){
-        printf("Underflow");
-    }else{
+    if(head!=NULL){
+        struct node* ptr;
         ptr = head;
+        printf("Deleted %d", head->data);
         head = ptr->next;
         free(ptr);
+    }else{
+        printf("Underflow");
     }
 }
 void display(){
-    struct node *ptr;
-    ptr = head;
-    if(head==NULL){
-        printf("There are no elements");
+    if(head!=NULL){
+        struct node *ptr;
+        ptr = head;
+        while(ptr!=NULL){
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
     }
-    while(ptr!=NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->next;
+    else{
+        printf("Queue is empty");
     }
 }
