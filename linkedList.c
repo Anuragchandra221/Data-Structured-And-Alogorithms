@@ -109,16 +109,19 @@ void insertEnd(){
     }
 }
 void deleteEnd(){
-    if(head!=NULL){
-        struct node *ptr, *temp;
+    struct node *ptr, *temp;
+    if(head==NULL){
+        printf("No elements");
+    }else if(head->next == NULL){
+        head = NULL;
+        free(head);
+    }else{
         ptr = head;
-        while(ptr->next != NULL){
+        while(ptr->next!=NULL){
             temp = ptr;
             ptr = ptr->next;
         }
         temp->next = NULL;
         free(ptr);
-    }else{
-        printf("No elements in linked list");
     }
 }
