@@ -27,7 +27,7 @@ void heapify(int a[],int n,int i){
 }
 
 void buildHeap(int a[],int n){
-    int lastLeaf = n/2 - 1, i;
+    int lastLeaf = (n-1)/2 , i;
     int temp;
     for(i=lastLeaf; i>=0; i--){
         heapify(a, n, i);
